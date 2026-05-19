@@ -29,7 +29,7 @@ WORKDIR /app
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 RUN pip install --upgrade pip setuptools wheel && \
-    pip install Flask==3.0.0 Werkzeug==3.0.1 requests==2.31.0 gunicorn==21.2.0
+    pip install Flask==3.0.3 Werkzeug==3.0.3 requests==2.32.4 gunicorn==23.0.0
 
 # Usunięcie zbędnych plików po instalacji
 RUN find /opt/venv -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true && \

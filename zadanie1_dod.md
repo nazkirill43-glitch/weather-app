@@ -29,16 +29,22 @@ docker scout cves kaleefff/weather-app:latest
 
 ### Wynik Analizy CVE
 
-- Brak zagrożeń CRITICAL
-- Brak zagrożeń HIGH
-- Obraz jest bezpieczny
+![alt text](image-6.png)
 
-Analiza wykazała 0 podatliwości krytycznych i wysokiego poziomu.
+### Uzasadnienie Zagrożeń
 
-### Wnioski
+#### HIGH CVE-2026-24049 (wheel 0.45.1)
 
-Obraz `kaleefff/weather-app:latest` spełnia wszystkie wymagania
-bezpieczeństwa i może być bezpiecznie deployowany do produkcji.
+- Zagrożenie: Path Traversal w pakiecie wheel
+- CVSS Score: 7.1
+
+### Uzasadnienie Ignorowania:
+
+- Pakiet `wheel` jest narzędziem do budowania pakietów Python
+- Zagrożenie wymaga dostępu lokalnego (AV:L) + interakcji użytkownika (UI:R)
+- W kontenerze aplikacji wheel nie jest używany w runtime'ie
+- Zagrożenie nie dotyczy działania aplikacji pogodowej
+- Aplikacja jest uruchamiana w kontenerze z ograniczonymi uprawnieniami (appuser)
 
 ### Linki
 

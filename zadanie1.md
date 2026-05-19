@@ -479,7 +479,7 @@ WORKDIR /app
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 RUN pip install --upgrade pip setuptools wheel && \
- pip install Flask==3.0.0 Werkzeug==3.0.1 requests==2.31.0 gunicorn==21.2.0
+ pip install Flask==3.0.3 Werkzeug==3.0.3 requests==2.32.4 gunicorn==23.0.0
 
 # Usunięcie zbędnych plików po instalacji
 
@@ -545,6 +545,13 @@ EXPOSE 5000
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
  CMD wget --no-verbose --tries=1 --spider http://localhost:5000/health || exit 1
+
+# BuildKit cache mount
+
+RUN --mount=type=cache,target=/root/.cache/pip \
+ pip install --upgrade pip
+
+# Punkt wejścia
 
 CMD sh -c "echo 'Autor: Kyryl Nazarov' && \
  echo 'Data startu: $(date +%Y-%m-%d\ %H:%M:%S)' && \
